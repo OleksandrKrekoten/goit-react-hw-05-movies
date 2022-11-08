@@ -1,6 +1,6 @@
 import { BsHouseFill } from 'react-icons/bs';
 import { Wraper, LinkGoHome } from './NotFound.styled';
-export const NotFound = () => {
+ const NotFound = () => {
   return (
     <Wraper>
       <img
@@ -14,3 +14,4 @@ export const NotFound = () => {
     </Wraper>
   );
 };
+export default NotFound

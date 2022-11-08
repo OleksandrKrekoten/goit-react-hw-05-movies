@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { getMovieById } from '../../services/api';
 import {
@@ -14,7 +14,7 @@ import {
   BsChatRightText,
   BsPersonLinesFill,
 } from 'react-icons/bs';
-export const MovieDetails = () => {
+ const MovieDetails = () => {
   const [movies, setMovies] = useState({});
   const { movieId } = useParams();
   useEffect(() => {
@@ -68,7 +68,10 @@ export const MovieDetails = () => {
           </LinkNav>
         </li>
       </LinkList>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
+export default MovieDetails;

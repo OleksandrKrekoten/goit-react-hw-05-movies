@@ -6,4 +6,5 @@ export const CastList = styled.ul`
 `;
 export const CastItem = styled.li`
   width: 200px;
+  padding: 10px;
 `;
