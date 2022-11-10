@@ -24,6 +24,7 @@ const MovieDetails = () => {
     });
   }, [movieId]);
   const backLink = location.state?.from ?? '/';
+  
   return (
     <>
       <GoBack to={backLink}>
