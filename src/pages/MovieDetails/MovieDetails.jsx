@@ -56,13 +56,13 @@ const MovieDetails = () => {
       </Flex>
       <LinkList>
         <li>
-          <LinkNav to="cast" state={{ from: location.state.from }}>
+          <LinkNav to="cast" state={{ from: backLink }}>
             <BsPersonLinesFill />
             <span>Cast</span>
           </LinkNav>
         </li>
         <li>
-          <LinkNav to="reviews" state={{ from: location.state.from }}>
+          <LinkNav to="reviews" state={{ from: backLink }}>
             <BsChatRightText />
             <span>Review</span>
           </LinkNav>
