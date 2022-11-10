@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getMovieById } from '../../services/api';
 import {
   Flex,
@@ -14,7 +14,8 @@ import {
   BsChatRightText,
   BsPersonLinesFill,
 } from 'react-icons/bs';
- const MovieDetails = () => {
+const MovieDetails = () => {
+  const location = useLocation();
   const [movies, setMovies] = useState({});
   const { movieId } = useParams();
   useEffect(() => {
@@ -22,12 +23,9 @@ import {
       setMovies(response.data);
     });
   }, [movieId]);
-
   return (
     <>
-      {' '}
-      <GoBack to="/">
-        {' '}
+      <GoBack to={location.state.from}>
         <BsFillArrowLeftCircleFill />
         <span>Go back</span>
       </GoBack>
@@ -56,13 +54,13 @@ import {
       </Flex>
       <LinkList>
         <li>
-          <LinkNav to="cast">
+          <LinkNav to="cast" state={{ from: location.state.from }}>
             <BsPersonLinesFill />
             <span>Cast</span>
           </LinkNav>
         </li>
         <li>
-          <LinkNav to="reviews">
+          <LinkNav to="reviews" state={{ from: location.state.from }}>
             <BsChatRightText />
             <span>Review</span>
           </LinkNav>

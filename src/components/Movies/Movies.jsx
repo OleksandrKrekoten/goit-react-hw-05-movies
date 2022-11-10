@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { getMovieByName } from '../../services/api';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
- const Movies = () => {
+const Movies = () => {
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [SearchParams, setSearchParams] = useSearchParams();
+  const searchQuery = SearchParams.get('query') ?? '';
   useEffect(() => {
     if (searchQuery !== '') {
       getMovieByName(searchQuery)
         .then(response => {
-          console.log(response.data.results);
           if (response.data.results.length === 0) {
             toast.error('Nothing found❗');
           }
@@ -27,11 +28,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
   const handleSubmit = e => {
     e.preventDefault();
-    setSearchQuery(e.target.elements.query.value);
+    setSearchParams(
+      e.target.elements.query.value !== ''
+        ? { query: e.target.elements.query.value }
+        : {}
+    );
     setMovies([]);
     e.target.elements.query.value = '';
-
-    return console.log('submitForm');
   };
 
   return (
@@ -46,7 +49,7 @@ import 'react-toastify/dist/ReactToastify.css';
           {movies.map(({ id, title, release_date }) => {
             return (
               <li key={id}>
-                <NavLink to={`/movies/${id}`}>
+                <NavLink to={`/movies/${id}`} state={{ from: location }}>
                   <h2>
                     {title} ({release_date.slice(0, 4)})
                   </h2>
@@ -59,4 +62,4 @@ import 'react-toastify/dist/ReactToastify.css';
     </>
   );
 };
-export default Movies
+export default Movies;
