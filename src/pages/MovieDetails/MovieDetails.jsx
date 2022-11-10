@@ -23,9 +23,10 @@ const MovieDetails = () => {
       setMovies(response.data);
     });
   }, [movieId]);
+  const backLink = location.state?.from ?? '/';
   return (
     <>
-      <GoBack to={location.state?.from ?? '/'}>
+      <GoBack to={backLink}>
         <BsFillArrowLeftCircleFill />
         <span>Go back</span>
       </GoBack>
