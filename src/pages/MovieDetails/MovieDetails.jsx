@@ -25,7 +25,7 @@ const MovieDetails = () => {
   }, [movieId]);
   return (
     <>
-      <GoBack to={location.state.from}>
+      <GoBack to={location.state?.from ?? '/'}>
         <BsFillArrowLeftCircleFill />
         <span>Go back</span>
       </GoBack>
